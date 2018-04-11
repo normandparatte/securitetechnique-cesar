@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Vector;
 
 /**
  * Cours :       Sécurité technique
@@ -128,7 +129,7 @@ public class ChiffrementCesar {
       throws IOException {
     String line = null;
 
-    String[] lignesFichiers = new String[10000];
+    Vector<String> lignesFichiers = new Vector();
     int i = 0;
 
     // Ouverture du fichier à chiffrer ou déchiffrer
@@ -136,7 +137,7 @@ public class ChiffrementCesar {
 
     // Lecture du fichier ligne par ligne
     while ((line = br.readLine()) != null) {
-      lignesFichiers[i] = line;
+      lignesFichiers.add(line);
       i++;
     }
     br.close();
@@ -144,10 +145,11 @@ public class ChiffrementCesar {
     // Création du fichier de sortie
     PrintWriter writer = new PrintWriter(cheminFichier, "UTF-8");
 
-    for (i = 0; lignesFichiers[i] != null; ++i) {
+    for (i = 0; i < lignesFichiers.size(); ++i) {
       // Ecriture du chiffrement dans le fichier de sortie
-      writer.println(chiffrementPhrase(lignesFichiers[i], decalage));
+      writer.println(chiffrementPhrase(lignesFichiers.get(i), decalage));
     }
+
     writer.flush();
   }
 
