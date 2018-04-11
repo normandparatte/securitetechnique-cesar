@@ -3,6 +3,8 @@ package modele;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
@@ -77,6 +79,50 @@ public class ChiffrementCesar {
 
   public static String chiffrementPhrase(String phraseADechiffrer, int decalage) {
     return chiffrementPhrase(phraseADechiffrer, decalage, true);
+  }
+
+  public static String chiffrementPhrase(String phraseADechiffrer) throws IOException {
+    StringBuilder phraseDeRetour = new StringBuilder("");
+    String[] motsDico = new ChiffrementCesar().chargerDictionnaire();
+
+    // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
+    for (int i=0;i<26;++i){
+      if(phraseDeRetour.length()>0) {
+        //Efface la phrase de retour
+        phraseDeRetour.delete(0, phraseDeRetour.length());
+      }
+
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer,i));
+
+      // Récupère tous les mots dans un tableau
+      String[] mots = phraseDeRetour.toString().split(" ");
+
+      for(int j=0;j<mots.length;++j){
+        for(int k=0;k<motsDico.length;++k){
+          if(mots[j].equals(motsDico[k])){
+            return "Clé:"+String.valueOf(i) +"\nPhrase:" + phraseDeRetour.toString();
+          }
+        }
+      }
+    }
+
+    return "Aucune clé de chiffrement trouvée !";
+  }
+
+  public String[] chargerDictionnaire() throws IOException {
+    String line = null;
+    InputStream ips = this.getClass().getClassLoader().getResourceAsStream("fr.txt");
+    InputStreamReader ipsr = new InputStreamReader(ips);
+    BufferedReader br = new BufferedReader(ipsr);
+    StringBuilder motsDico = new StringBuilder("");
+
+    // Lecture du fichier ligne par ligne
+    while ((line = br.readLine()) != null) {
+      motsDico.append(line+";");
+    }
+    br.close();
+
+    return motsDico.toString().split(";");
   }
 
   public static void chiffrementFichier(String cheminFichier, int decalage)
