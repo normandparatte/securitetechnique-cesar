@@ -4,6 +4,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import modele.ChiffrementCesar;
 
+/**
+ * Cours :       Sécurité technique
+ * Description : Programme permettant de chiffrer et de déchiffrer
+ *               des messages ou des fichiers selon le chiffrement de César
+ * Auteurs :     Francis Hêche & Normand Paratte
+ * Date    :     Avril 2018
+ */
+
 public class Menu {
   public static void menu() throws IOException {
     Scanner sc = new Scanner(System.in);
@@ -25,6 +33,8 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
     String param1 = "";
     String param2 = "";
+    Boolean param3 = false;
+    String saisie = "";
     String resultat = "";
 
     switch (num.charAt(0)) {
@@ -37,7 +47,16 @@ public class Menu {
         System.out.println("\nVeuillez indiquer la clé de chiffrage :");
         param2 = sc.next();
 
-        resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2));
+        System.out.println("\nVoulez-vous limiter le chiffrement à l'alphabet ? (O = Oui, N = Non)");
+        saisie=sc.next();
+        if(saisie.equals("O")||saisie.equals("o")){
+          param3=true;
+        } else
+        {
+          param3=false;
+        };
+
+        resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2), param3);
 
         System.out.println("Voici la phrase chiffrée :\n");
         System.out.println(resultat + "\n");
@@ -49,7 +68,17 @@ public class Menu {
         System.out.println("\nVeuillez indiquer la clé de déchiffrage :");
         param2 = sc.next();
 
-        resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2));
+        System.out.println("\nVoulez-vous limiter le chiffrement à l'alphabet ? (O = Oui, N = Non)");
+        saisie=sc.next();
+        if(saisie.equals("O")||saisie.equals("o")){
+          param3=true;
+        } else
+        {
+          param3=false;
+        };
+
+        resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2), param3);
+
         System.out.println("Voici la phrase déchiffrée :\n");
         System.out.println(resultat + "\n");
         break;
