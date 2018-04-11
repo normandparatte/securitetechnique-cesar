@@ -1,11 +1,15 @@
+package modele;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Cours :       Sécurité technique Description : Programme permettant de chiffrer et de déchiffrer
- * des messages ou des fichiers selon le chiffrement de César Auteurs :     Francis Hêche & Normand
+ * Cours :       Sécurité technique
+ * Description : Programme permettant de chiffrer et de déchiffrer
+ *               des messages ou des fichiers selon le chiffrement de César
+ * Auteurs :     Francis Hêche & Normand
  * Paratte Date    :     Avril 2018
  */
 
