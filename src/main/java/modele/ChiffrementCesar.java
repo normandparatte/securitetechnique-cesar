@@ -15,24 +15,22 @@ import java.io.PrintWriter;
  * Date    :     Avril 2018
  */
 
-
 public class ChiffrementCesar {
 
   public static String chiffrementPhrase(String phraseADechiffrer, int decalage,
       boolean uniquementAlphabet) {
     StringBuilder phraseDeRetour = new StringBuilder("");
-    int decalageReel=0;
+    int decalageReel = 0;
     int decalagePossible = 0;
     int codeAsciiMin = 0;
     int codeAsciiMax = 0;
     // Explose la phrase dans un tableau
     String[] caracteres = phraseADechiffrer.split("");
 
-
     // Parcours le tableau
     for (int i = 0; i < caracteres.length; ++i) {
-      //Ne change pas les espaces
-      if(caracteres[i].length()>0) {
+      if (caracteres[i].length() > 0) {
+        //Ne change pas les espaces
         if (caracteres[i].charAt(0) != ' ') {
           if (uniquementAlphabet) {
             // ----- Décalage circulaire -----
@@ -60,7 +58,8 @@ public class ChiffrementCesar {
               phraseDeRetour.append(String.valueOf((char) (codeAsciiMin + decalageReel)));
             } else {
               // Sinon applique le décalage
-              phraseDeRetour.append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
+              phraseDeRetour
+                  .append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
             }
           } else {
             // Decale selon le décalage choisi
@@ -69,7 +68,7 @@ public class ChiffrementCesar {
         } else {
           phraseDeRetour.append(" ");
         }
-      }else{
+      } else {
         phraseDeRetour.append("");
       }
     }
@@ -86,21 +85,21 @@ public class ChiffrementCesar {
     String[] motsDico = new ChiffrementCesar().chargerDictionnaire();
 
     // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
-    for (int i=0;i<26;++i){
-      if(phraseDeRetour.length()>0) {
+    for (int i = 0; i < 26; ++i) {
+      if (phraseDeRetour.length() > 0) {
         //Efface la phrase de retour
         phraseDeRetour.delete(0, phraseDeRetour.length());
       }
 
-      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer,i));
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer, i));
 
       // Récupère tous les mots dans un tableau
       String[] mots = phraseDeRetour.toString().split(" ");
 
-      for(int j=0;j<mots.length;++j){
-        for(int k=0;k<motsDico.length;++k){
-          if(mots[j].equals(motsDico[k])){
-            return "Clé:"+String.valueOf(i) +"\nPhrase:" + phraseDeRetour.toString();
+      for (int j = 0; j < mots.length; ++j) {
+        for (int k = 0; k < motsDico.length; ++k) {
+          if (mots[j].equals(motsDico[k])) {
+            return "Clé:" + String.valueOf(i) + "\nPhrase:" + phraseDeRetour.toString();
           }
         }
       }
@@ -118,7 +117,7 @@ public class ChiffrementCesar {
 
     // Lecture du fichier ligne par ligne
     while ((line = br.readLine()) != null) {
-      motsDico.append(line+";");
+      motsDico.append(line + ";");
     }
     br.close();
 
@@ -158,31 +157,33 @@ public class ChiffrementCesar {
     int[] correspondance = new int[26];
 
     // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
-    for (int i=0;i<26;++i){
-      if(phraseDeRetour.length()>0){
-        phraseDeRetour.delete(0,phraseDeRetour.length());
+    for (int i = 0; i < 26; ++i) {
+      if (phraseDeRetour.length() > 0) {
+        phraseDeRetour.delete(0, phraseDeRetour.length());
       }
 
-      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer,i));
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer, i));
 
       // Récupère toutes les lettres
       String[] lettres = phraseDeRetour.toString().split("");
 
-      for(int j=0;j<lettres.length;++j){
-        if(lettres[j]=="e"||lettres[j]=="E"){
+      for (int j = 0; j < lettres.length; ++j) {
+        if (lettres[j].equals("e") || lettres[j].equals("E")) {
           correspondance[i] += 1;
         }
       }
     }
 
-    int nombreMax=0;
-    int indiceNombreMax=0;
-    for (int i=0;i<26;++i){
-      if(correspondance[i]>nombreMax){
-        indiceNombreMax=i;
+    int nombreMax = 0;
+    int indiceNombreMax = 0;
+    for (int i = 0; i < 26; ++i) {
+      if (correspondance[i] > nombreMax) {
+        nombreMax = correspondance[i];
+        indiceNombreMax = i;
       }
     }
 
-    return "Clé : "+String.valueOf(indiceNombreMax)+"\n"+"Phrase : "+chiffrementPhrase(phraseADechiffrer,indiceNombreMax);
+    return "Clé : " + String.valueOf(indiceNombreMax + 1) + "\n" + "Phrase : " + chiffrementPhrase(
+        phraseADechiffrer, indiceNombreMax);
   }
 }
