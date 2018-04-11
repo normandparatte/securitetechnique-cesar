@@ -83,32 +83,30 @@ public class ChiffrementCesar {
 
   public static String chiffrementPhrase(String phraseADechiffrer) throws IOException {
     StringBuilder phraseDeRetour = new StringBuilder("");
-
-    // Explose la phrase dans un tableau
-    String[] caracteres = phraseADechiffrer.split("");
-
     String[] motsDico = new ChiffrementCesar().chargerDictionnaire();
-
-    for(int i=0;i<motsDico.length;++i){
-      System.out.println(motsDico[i]);
-    }
 
     // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
     for (int i=0;i<26;++i){
-      //Efface la phrase de retour
-      phraseDeRetour.delete(0,phraseDeRetour.length());
+      if(phraseDeRetour.length()>0) {
+        //Efface la phrase de retour
+        phraseDeRetour.delete(0, phraseDeRetour.length());
+      }
 
-      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer));
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer,i));
 
       // Récupère tous les mots dans un tableau
-      String[] mots = phraseADechiffrer.split(" ");
+      String[] mots = phraseDeRetour.toString().split(" ");
 
-      for(i=0;i<mots.length;++i){
-        //ici normand comparer mots[i] avec le dico et arreter si correspondance
+      for(int j=0;j<mots.length;++j){
+        for(int k=0;k<motsDico.length;++k){
+          if(mots[j].equals(motsDico[k])){
+            return "Clé:"+String.valueOf(i) +"\nPhrase:" + phraseDeRetour.toString();
+          }
+        }
       }
     }
 
-    return phraseDeRetour.toString();
+    return "Aucune clé de chiffrement trouvée !";
   }
 
   public String[] chargerDictionnaire() throws IOException {

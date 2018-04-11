@@ -88,8 +88,8 @@ public class Menu {
         System.out.println("\nVeuillez indiquer la phrase à déchiffrer :");
         param1 = sc.next();
 
-        ChiffrementCesar.chiffrementPhrase(param1);
-        System.out.println("Le fichier a été déchiffré");
+        System.out.println(ChiffrementCesar.chiffrementPhrase(param1));
+
         break;
       default:
         System.out.println("\n\nUne erreur est survenue, veuillez recommencer !\n");
