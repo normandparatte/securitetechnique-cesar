@@ -58,8 +58,7 @@ public class ChiffrementCesar {
               phraseDeRetour.append(String.valueOf((char) (codeAsciiMin + decalageReel)));
             } else {
               // Sinon applique le décalage
-              phraseDeRetour
-                  .append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
+              phraseDeRetour.append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
             }
           } else {
             // Decale selon le décalage choisi

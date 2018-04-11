@@ -57,7 +57,7 @@ public class Menu {
         System.out.println("\nVeuillez indiquer la clé de déchiffrage :");
         param2 = sc.next();
 
-        resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2));
+        resultat = ChiffrementCesar.chiffrementPhrase(param1, -Integer.valueOf(param2));
 
         System.out.println("Voici la phrase déchiffrée :\n");
         System.out.println(resultat + "\n");
@@ -80,7 +80,7 @@ public class Menu {
         System.out.println("\nVeuillez indiquer la clé de déchiffrage :");
         param2 = sc.next();
 
-        ChiffrementCesar.chiffrementFichier(param1, Integer.valueOf(param2));
+        ChiffrementCesar.chiffrementFichier(param1, -Integer.valueOf(param2));
         System.out.println("Le fichier a été déchiffré");
         break;
       default:
