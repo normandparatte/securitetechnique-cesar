@@ -151,4 +151,38 @@ public class ChiffrementCesar {
     }
     writer.flush();
   }
+
+  public static String chiffrementPhraseViaFrequence(String phraseADechiffrer) {
+    //ici normand développer cette méthode
+    StringBuilder phraseDeRetour = new StringBuilder("");
+    int[] correspondance = new int[26];
+
+    // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
+    for (int i=0;i<26;++i){
+      if(phraseDeRetour.length()>0){
+        phraseDeRetour.delete(0,phraseDeRetour.length());
+      }
+
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer,i));
+
+      // Récupère toutes les lettres
+      String[] lettres = phraseDeRetour.toString().split("");
+
+      for(int j=0;j<lettres.length;++j){
+        if(lettres[j]=="e"||lettres[j]=="E"){
+          correspondance[i] += 1;
+        }
+      }
+    }
+
+    int nombreMax=0;
+    int indiceNombreMax=0;
+    for (int i=0;i<26;++i){
+      if(correspondance[i]>nombreMax){
+        indiceNombreMax=i;
+      }
+    }
+
+    return "Clé : "+String.valueOf(indiceNombreMax)+"\n"+"Phrase : "+chiffrementPhrase(phraseADechiffrer,indiceNombreMax);
+  }
 }

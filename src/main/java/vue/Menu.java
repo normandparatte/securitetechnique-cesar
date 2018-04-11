@@ -23,6 +23,7 @@ public class Menu {
       System.out.println("3. Chiffrer un fichier");
       System.out.println("4. Déchiffrer un fichier");
       System.out.println("5. Déchiffrer sans clé via dictionnaire");
+      System.out.println("6. Déchiffrer sans clé via analyse de fréquence");
       System.out.println("0. Sortir de l'application");
       System.out.print("\nVotre choix : ");
       String str = sc.nextLine();
@@ -41,10 +42,10 @@ public class Menu {
         System.exit(0);
       case '1':
         System.out.println("\nVeuillez entrer la phrase à chiffrer :");
-        param1 = sc.next();
+        param1 = sc.nextLine();
 
         System.out.println("\nVeuillez indiquer la clé de chiffrage :");
-        param2 = sc.next();
+        param2 = sc.nextLine();
 
         resultat = ChiffrementCesar.chiffrementPhrase(param1, Integer.valueOf(param2));
 
@@ -53,10 +54,10 @@ public class Menu {
         break;
       case '2':
         System.out.println("\nVeuillez entrer la phrase à déchiffrer :");
-        param1 = sc.next();
+        param1 = sc.nextLine();
 
         System.out.println("\nVeuillez indiquer la clé de déchiffrage :");
-        param2 = sc.next();
+        param2 = sc.nextLine();
 
         resultat = ChiffrementCesar.chiffrementPhrase(param1, -Integer.valueOf(param2));
 
@@ -66,29 +67,36 @@ public class Menu {
       case '3':
 
         System.out.println("\nVeuillez indiquer le fichier à chiffrer :");
-        param1 = sc.next();
+        param1 = sc.nextLine();
 
         System.out.println("\nVeuillez indiquer la clé de chiffrage :");
-        param2 = sc.next();
+        param2 = sc.nextLine();
 
         ChiffrementCesar.chiffrementFichier(param1, Integer.valueOf(param2));
         System.out.println("Le fichier a été chiffré");
         break;
       case '4':
         System.out.println("\nVeuillez indiquer le fichier à déchiffrer :");
-        param1 = sc.next();
+        param1 = sc.nextLine();
 
         System.out.println("\nVeuillez indiquer la clé de déchiffrage :");
-        param2 = sc.next();
+        param2 = sc.nextLine();
 
         ChiffrementCesar.chiffrementFichier(param1, -Integer.valueOf(param2));
         System.out.println("Le fichier a été déchiffré");
         break;
       case '5':
         System.out.println("\nVeuillez indiquer la phrase à déchiffrer :");
-        param1 = sc.next();
+        param1 = sc.nextLine();
 
         System.out.println(ChiffrementCesar.chiffrementPhrase(param1));
+
+        break;
+      case '6':
+        System.out.println("\nVeuillez indiquer la phrase à déchiffrer :");
+        param1 = sc.nextLine();
+
+        System.out.println(ChiffrementCesar.chiffrementPhraseViaFrequence(param1));
 
         break;
       default:
