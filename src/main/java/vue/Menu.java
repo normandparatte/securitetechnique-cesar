@@ -23,6 +23,7 @@ public class Menu {
       System.out.println("3. Chiffrer un fichier");
       System.out.println("4. Déchiffrer un fichier");
       System.out.println("5. Déchiffrer sans clé via dictionnaire");
+      System.out.println("6. Déchiffrer sans clé via analyse de fréquence");
       System.out.println("0. Sortir de l'application");
       System.out.print("\nVotre choix : ");
       String str = sc.nextLine();
@@ -89,6 +90,13 @@ public class Menu {
         param1 = sc.next();
 
         System.out.println(ChiffrementCesar.chiffrementPhrase(param1));
+
+        break;
+      case '6':
+        System.out.println("\nVeuillez indiquer la phrase à déchiffrer :");
+        param1 = sc.next();
+
+        System.out.println(ChiffrementCesar.chiffrementPhraseViaFrequence(param1));
 
         break;
       default:

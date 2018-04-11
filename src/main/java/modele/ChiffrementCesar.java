@@ -151,4 +151,9 @@ public class ChiffrementCesar {
     }
     writer.flush();
   }
+
+  public static String chiffrementPhraseViaFrequence(String phraseADechiffrer) {
+    //ici normand développer cette méthode
+    return "";
+  }
 }
