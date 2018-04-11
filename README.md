@@ -10,6 +10,6 @@ En cryptographie, le chiffrement par décalage, aussi connu comme le chiffre de 
 
 Le texte chiffré s'obtient en remplaçant chaque lettre du texte clair original par une lettre à distance fixe, toujours du même côté, dans l'ordre de l'alphabet. Pour les dernières lettres (dans le cas d'un décalage à droite), on reprend au début. Par exemple avec un décalage de 3 vers la droite, A est remplacé par D, B devient E, et ainsi jusqu'à W qui devient Z, puis X devient A etc. Il s'agit d'une permutation circulaire de l'alphabet.
 
-# Participants
-Normand Paratte
-Francis Hêche
+## Participants
+- Normand Paratte
+- Francis Hêche
