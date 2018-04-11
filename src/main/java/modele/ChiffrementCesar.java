@@ -30,41 +30,46 @@ public class ChiffrementCesar {
     // Parcours le tableau
     for (int i = 0; i < caracteres.length; ++i) {
       //Ne change pas les espaces
-      if (caracteres[i].charAt(0) != ' ') {
-        if (uniquementAlphabet) {
-          // ----- Décalage circulaire -----
-          // Modulo de 26 pour enlever les tours de l'alphabet inutiles
-          decalageReel = decalage % 26;
+      if(caracteres[i].length()>0) {
+        if (caracteres[i].charAt(0) != ' ') {
+          if (uniquementAlphabet) {
+            // ----- Décalage circulaire -----
+            // Modulo de 26 pour enlever les tours de l'alphabet inutiles
+            decalageReel = decalage % 26;
 
-          if (caracteres[i].charAt(0) >= 65 && caracteres[i].charAt(0) <= 90) {
-            // ----- Si c'est une majuscule -----
-            codeAsciiMin = 65;
-            codeAsciiMax = 90;
-          } else if (caracteres[i].charAt(0) >= 97 && caracteres[i].charAt(0) <= 122) {
-            codeAsciiMin = 97;
-            codeAsciiMax = 122;
-          }
+            if (caracteres[i].charAt(0) >= 65 && caracteres[i].charAt(0) <= 90) {
+              // ----- Si c'est une majuscule -----
+              codeAsciiMin = 65;
+              codeAsciiMax = 90;
+            } else if (caracteres[i].charAt(0) >= 97 && caracteres[i].charAt(0) <= 122) {
+              codeAsciiMin = 97;
+              codeAsciiMax = 122;
+            }
 
-          // Calcul le décalage possible
-          decalagePossible = codeAsciiMax - caracteres[i].charAt(0);
+            // Calcul le décalage possible
+            decalagePossible = codeAsciiMax - caracteres[i].charAt(0);
 
-          if (decalageReel > decalagePossible) {
-            // Si on ne peut pas décaler sans sortir de l'alphabet
-            // Recalcule depuis "a"
-            decalageReel -= decalagePossible;
-            // Enlève encore 1 car on effectue déjà un décalage en se replacant sur le a
-            decalageReel -= 1;
-            phraseDeRetour.append(String.valueOf((char) (codeAsciiMin + decalageReel)));
+            if (decalageReel > decalagePossible) {
+              // Si on ne peut pas décaler sans sortir de l'alphabet
+              // Recalcule depuis "a"
+              decalageReel -= decalagePossible;
+              // Enlève encore 1 car on effectue déjà un décalage en se replacant sur le a
+              decalageReel -= 1;
+              phraseDeRetour.append(String.valueOf((char) (codeAsciiMin + decalageReel)));
+            } else {
+              // Sinon applique le décalage
+              phraseDeRetour
+                  .append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
+            }
           } else {
-            // Sinon applique le décalage
-            phraseDeRetour.append(String.valueOf((char) (caracteres[i].charAt(0) + decalageReel)));
+            // Decale selon le décalage choisi
+            phraseDeRetour.append(String.valueOf((char) (caracteres[i].charAt(0) + decalage)));
           }
         } else {
-          // Decale selon le décalage choisi
-          phraseDeRetour.append(String.valueOf((char) (caracteres[i].charAt(0) + decalage)));
+          phraseDeRetour.append(" ");
         }
-      } else {
-        phraseDeRetour.append(" ");
+      }else{
+        phraseDeRetour.append("");
       }
     }
 
@@ -72,16 +77,14 @@ public class ChiffrementCesar {
   }
 
   public static String chiffrementPhrase(String phraseADechiffrer, int decalage) {
-    return chiffrementPhrase(phraseADechiffrer, decalage, false);
+    return chiffrementPhrase(phraseADechiffrer, decalage, true);
   }
 
   public static void chiffrementFichier(String cheminFichier, int decalage)
       throws IOException {
     String line = null;
 
-    //OUVERTURE DU FICHIER
-
-    String[] lignesFichiers = new String[1000];
+    String[] lignesFichiers = new String[10000];
     int i = 0;
 
     // Ouverture du fichier à chiffrer ou déchiffrer
