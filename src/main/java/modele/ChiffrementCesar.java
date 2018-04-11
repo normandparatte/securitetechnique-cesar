@@ -1,8 +1,11 @@
 package modele;
 
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
@@ -77,6 +80,53 @@ public class ChiffrementCesar {
 
   public static String chiffrementPhrase(String phraseADechiffrer, int decalage) {
     return chiffrementPhrase(phraseADechiffrer, decalage, true);
+  }
+
+  public static String chiffrementPhrase(String phraseADechiffrer) throws IOException {
+    StringBuilder phraseDeRetour = new StringBuilder("");
+
+    // Explose la phrase dans un tableau
+    String[] caracteres = phraseADechiffrer.split("");
+
+    String[] motsDico = chargerDictionnaire();
+
+    for(int i=0;i<motsDico.length;++i){
+      System.out.println(motsDico[i]);
+    }
+    //ici normand enlever quand chargerDictionnaire est prêt
+    System.exit(0);
+    // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
+    for (int i=0;i<26;++i){
+      //Efface la phrase de retour
+      phraseDeRetour.delete(0,phraseDeRetour.length());
+
+      phraseDeRetour.append(chiffrementPhrase(phraseADechiffrer));
+
+      // Récupère tous les mots dans un tableau
+      String[] mots = phraseADechiffrer.split(" ");
+
+      for(i=0;i<mots.length;++i){
+        //ici normand comparer mots[i] avec le dico et arreter si correspondance
+      }
+    }
+
+    return phraseDeRetour.toString();
+  }
+
+  public static String[] chargerDictionnaire() throws IOException {
+    String line = null;
+    InputStream ips = Toolkit.getDefaultToolkit().getClass().getClassLoader().getResourceAsStream("resources\fr.txt");
+    InputStreamReader ipsr = new InputStreamReader(ips);
+    BufferedReader br = new BufferedReader(ipsr);
+    StringBuilder motsDico = new StringBuilder("");
+
+    // Lecture du fichier ligne par ligne
+    while ((line = br.readLine()) != null) {
+      motsDico.append(line+";");
+    }
+    br.close();
+
+    return motsDico.toString().split(";");
   }
 
   public static void chiffrementFichier(String cheminFichier, int decalage)
