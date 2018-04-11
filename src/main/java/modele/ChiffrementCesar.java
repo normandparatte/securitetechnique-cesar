@@ -1,6 +1,5 @@
 package modele;
 
-import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -88,13 +87,12 @@ public class ChiffrementCesar {
     // Explose la phrase dans un tableau
     String[] caracteres = phraseADechiffrer.split("");
 
-    String[] motsDico = chargerDictionnaire();
+    String[] motsDico = new ChiffrementCesar().chargerDictionnaire();
 
     for(int i=0;i<motsDico.length;++i){
       System.out.println(motsDico[i]);
     }
-    //ici normand enlever quand chargerDictionnaire est prêt
-    System.exit(0);
+
     // Boucle sur toutes les possibilités (26 lettres de l'alphabet)
     for (int i=0;i<26;++i){
       //Efface la phrase de retour
@@ -113,9 +111,9 @@ public class ChiffrementCesar {
     return phraseDeRetour.toString();
   }
 
-  public static String[] chargerDictionnaire() throws IOException {
+  public String[] chargerDictionnaire() throws IOException {
     String line = null;
-    InputStream ips = Toolkit.getDefaultToolkit().getClass().getClassLoader().getResourceAsStream("resources\fr.txt");
+    InputStream ips = this.getClass().getClassLoader().getResourceAsStream("fr.txt");
     InputStreamReader ipsr = new InputStreamReader(ips);
     BufferedReader br = new BufferedReader(ipsr);
     StringBuilder motsDico = new StringBuilder("");
