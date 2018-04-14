@@ -154,7 +154,6 @@ public class ChiffrementCesar {
   }
 
   public static String chiffrementPhraseViaFrequence(String phraseADechiffrer) {
-    //ici normand développer cette méthode
     StringBuilder phraseDeRetour = new StringBuilder("");
     int[] correspondance = new int[26];
 
